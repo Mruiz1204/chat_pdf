@@ -1,8 +1,9 @@
-langchain
-langchain-community
-PyPDF2
-python-dotenv
 streamlit
-faiss-cpu
-openai
+langchain==0.2.16
+langchain-community==0.2.16
+langchain-text-splitters==0.2.4
+openai==1.40.0
 tiktoken
+faiss-cpu
+PyPDF2
+pillow

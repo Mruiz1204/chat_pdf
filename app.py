@@ -2,10 +2,13 @@ import os
 import streamlit as st
 from PIL import Image
 from PyPDF2 import PdfReader
-from langchain.text_splitter import CharacterTextSplitter
+try:
+    from langchain_text_splitters import CharacterTextSplitter
+except ImportError:
+    from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_community.llms import OpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain.chains.question_answering import load_qa_chain
 import platform
 
@@ -108,9 +111,8 @@ if pdf is not None and ke:
         if user_question:
             docs = knowledge_base.similarity_search(user_question)
             
-            # Use a current model instead of deprecated text-davinci-003
-            # Options: "gpt-3.5-turbo-instruct" or "gpt-4o" depending on your API access
-            llm = OpenAI(temperature=0, model_name="gpt-4o-mini-2024-07-18")
+            # Modelo de chat actual (compatible con gpt-4o-mini)
+            llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
             
             # Load QA chain
             chain = load_qa_chain(llm, chain_type="stuff")
