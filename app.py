@@ -3,26 +3,67 @@ import streamlit as st
 from PIL import Image
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.llms import OpenAI
+from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_community.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 import platform
 
+# ---- Estilo personalizado: paleta beige / rosado / café 🤎🎀 ----
+st.set_page_config(page_title="Chat con PDF · Mari Reinoso", page_icon="🎀", layout="centered")
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&family=Poppins:wght@300;400;600&display=swap');
+
+    /* Fondo beige suave */
+    .stApp {
+        background: linear-gradient(135deg, #f7efe7 0%, #f3e3df 100%);
+        color: #5c4033;
+        font-family: 'Poppins', sans-serif;
+    }
+    /* Títulos elegantes en café */
+    h1, h2, h3 {
+        font-family: 'Cormorant Garamond', serif;
+        color: #7a5c52;
+    }
+    /* Barra lateral en rosado empolvado */
+    section[data-testid="stSidebar"] {
+        background: #f0d9d5;
+    }
+    /* Botones en café rosado */
+    .stButton>button {
+        background-color: #c98b8b;
+        color: white;
+        border-radius: 12px;
+        border: none;
+    }
+    .stButton>button:hover {
+        background-color: #a86e6e;
+        color: #fff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # App title and presentation
-st.title('Generación Aumentada por Recuperación (RAG) 💬')
+st.markdown("<h1 style=\"font-family:'Great Vibes', cursive; font-size:3rem; color:#a86e6e; margin-bottom:0;\">Mari Reinoso 🎀</h1>", unsafe_allow_html=True)
+st.title('Generación Aumentada por Recuperación (RAG) 💬🤎')
+st.caption("Conversa con tus documentos PDF usando Inteligencia Artificial.")
 st.write("Versión de Python:", platform.python_version())
 
 # Load and display image
 try:
-    image = Image.open('Chat_pdf.png')
-    st.image(image, width=350)
+    image = Image.open('chat_pdf_mari.jpg')
+    st.image(image, width=350, caption="Tus documentos, a un chat de distancia 📚")
 except Exception as e:
     st.warning(f"No se pudo cargar la imagen: {e}")
 
 # Sidebar information
 with st.sidebar:
-    st.subheader("Este Agente te ayudará a realizar análisis sobre el PDF cargado")
+    st.subheader("📄 Agente lector de PDF")
+    st.write("Este agente te ayudará a realizar análisis y responder preguntas sobre el PDF que cargues. Hecho con cariño por Mari Reinoso 🤎🎀")
 
 # Get API key from user
 ke = st.text_input('Ingresa tu Clave de OpenAI', type="password")
@@ -60,8 +101,8 @@ if pdf is not None and ke:
         knowledge_base = FAISS.from_texts(chunks, embeddings)
         
         # User question interface
-        st.subheader("Escribe qué quieres saber sobre el documento")
-        user_question = st.text_area(" ", placeholder="Escribe tu pregunta aquí...")
+        st.subheader("✨ Escribe qué quieres saber sobre el documento")
+        user_question = st.text_area("Tu pregunta", placeholder="Escribe tu pregunta aquí...")
         
         # Process question when submitted
         if user_question:
