@@ -37,6 +37,15 @@ st.markdown(
     section[data-testid="stSidebar"] {
         background: #12272f;
     }
+    /* Texto de la barra lateral en color claro para que se vea bien */
+    section[data-testid="stSidebar"] * {
+        color: #e8eef0 !important;
+    }
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3 {
+        color: #e07a5f !important;
+    }
     /* Botones terracota */
     .stButton>button {
         background-color: #e07a5f;
