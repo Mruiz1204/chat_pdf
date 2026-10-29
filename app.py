@@ -32,6 +32,9 @@ st.markdown(
         color: #e8eef0;
         font-family: 'Inter', sans-serif;
     }
+    /* Integrar la barra superior de Streamlit al fondo (no blanca) */
+    [data-testid="stHeader"] { background: transparent !important; }
+    [data-testid="stToolbar"] { right: 1rem; }
     /* Texto general claro: párrafos, listas, spans, markdown */
     .stApp, .stApp p, .stApp li, .stApp span, .stApp label,
     .stMarkdown, [data-testid="stCaptionContainer"],
