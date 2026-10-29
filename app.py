@@ -15,37 +15,38 @@ except ImportError:
     from langchain_community.chat_models import ChatOpenAI
 import platform
 
-# ---- Estilo personalizado: paleta beige / rosado / café 🤎🎀 ----
-st.set_page_config(page_title="Chat con PDF · Mari Reinoso", page_icon="🎀", layout="centered")
+# ---- Estilo personalizado: paleta azul petróleo + terracota (Miguel Ruiz) ----
+st.set_page_config(page_title="Chat con PDF · Miguel Ruiz", page_icon="📄", layout="centered")
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&family=Poppins:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Inter:wght@300;400;600&display=swap');
 
-    /* Fondo beige suave */
+    /* Fondo azul petróleo oscuro */
     .stApp {
-        background: linear-gradient(135deg, #f7efe7 0%, #f3e3df 100%);
-        color: #5c4033;
-        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1b3a4b 0%, #14303d 100%);
+        color: #e8eef0;
+        font-family: 'Inter', sans-serif;
     }
-    /* Títulos elegantes en café */
+    /* Títulos en terracota */
     h1, h2, h3 {
-        font-family: 'Cormorant Garamond', serif;
-        color: #7a5c52;
+        font-family: 'Montserrat', sans-serif;
+        color: #e07a5f;
     }
-    /* Barra lateral en rosado empolvado */
+    /* Barra lateral azul petróleo más oscuro */
     section[data-testid="stSidebar"] {
-        background: #f0d9d5;
+        background: #12272f;
     }
-    /* Botones en café rosado */
+    /* Botones terracota */
     .stButton>button {
-        background-color: #c98b8b;
-        color: white;
-        border-radius: 12px;
+        background-color: #e07a5f;
+        color: #fff;
+        border-radius: 10px;
         border: none;
+        font-weight: 600;
     }
     .stButton>button:hover {
-        background-color: #a86e6e;
+        background-color: #c9583c;
         color: #fff;
     }
     </style>
@@ -54,14 +55,14 @@ st.markdown(
 )
 
 # App title and presentation
-st.markdown("<h1 style=\"font-family:'Great Vibes', cursive; font-size:3rem; color:#a86e6e; margin-bottom:0;\">Mari Reinoso 🎀</h1>", unsafe_allow_html=True)
-st.title('Generación Aumentada por Recuperación (RAG) 💬🤎')
+st.markdown("<h1 style=\"font-family:'Montserrat', sans-serif; font-weight:700; font-size:2.4rem; color:#f2cc8f; margin-bottom:0;\">Miguel Ruiz</h1>", unsafe_allow_html=True)
+st.title('Generación Aumentada por Recuperación (RAG) 💬')
 st.caption("Conversa con tus documentos PDF usando Inteligencia Artificial.")
 st.write("Versión de Python:", platform.python_version())
 
 # Load and display image
 try:
-    image = Image.open('chat_pdf_mari.jpg')
+    image = Image.open('chat_pdf_img.jpg')
     st.image(image, width=350, caption="Tus documentos, a un chat de distancia 📚")
 except Exception as e:
     st.warning(f"No se pudo cargar la imagen: {e}")
@@ -69,7 +70,7 @@ except Exception as e:
 # Sidebar information
 with st.sidebar:
     st.subheader("📄 Agente lector de PDF")
-    st.write("Este agente te ayudará a realizar análisis y responder preguntas sobre el PDF que cargues. Hecho con cariño por Mari Reinoso 🤎🎀")
+    st.write("Este agente te ayudará a realizar análisis y responder preguntas sobre el PDF que cargues. Desarrollado por Miguel Ruiz.")
 
 # Get API key from user
 ke = st.text_input('Ingresa tu Clave de OpenAI', type="password")
