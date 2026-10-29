@@ -2,6 +2,7 @@ streamlit
 langchain==0.2.16
 langchain-community==0.2.16
 langchain-text-splitters==0.2.4
+langchain-openai==0.1.23
 openai==1.40.0
 tiktoken
 faiss-cpu
