@@ -16,7 +16,11 @@ except ImportError:
 import platform
 
 # ---- Estilo personalizado: paleta azul petróleo + terracota (Miguel Ruiz) ----
-st.set_page_config(page_title="Chat con PDF · Miguel Ruiz", page_icon="📄", layout="centered")
+try:
+    _icon = Image.open('logo_mr.png')
+except Exception:
+    _icon = "📄"
+st.set_page_config(page_title="Chat con PDF · Miguel Ruiz", page_icon=_icon, layout="centered")
 st.markdown(
     """
     <style>
@@ -28,16 +32,34 @@ st.markdown(
         color: #e8eef0;
         font-family: 'Inter', sans-serif;
     }
-    /* Títulos en terracota */
-    h1, h2, h3 {
-        font-family: 'Montserrat', sans-serif;
-        color: #e07a5f;
+    /* Texto general claro: párrafos, listas, spans, markdown */
+    .stApp, .stApp p, .stApp li, .stApp span, .stApp label,
+    .stMarkdown, [data-testid="stCaptionContainer"],
+    [data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] * {
+        color: #e8eef0 !important;
     }
+    /* Títulos en terracota */
+    h1, h2, h3, h4 {
+        font-family: 'Montserrat', sans-serif !important;
+        color: #e07a5f !important;
+    }
+    /* Campos de entrada: fondo claro con texto oscuro para que se lean */
+    .stTextInput input, .stTextArea textarea,
+    .stSelectbox div[data-baseweb="select"] > div,
+    .stNumberInput input {
+        background-color: #f3f6f7 !important;
+        color: #14303d !important;
+    }
+    input::placeholder, textarea::placeholder { color: #5c7079 !important; }
+
+    /* Mensajes de estado (info/warning/success) legibles */
+    [data-testid="stNotification"] * { color: #14303d !important; }
+
     /* Barra lateral azul petróleo más oscuro */
     section[data-testid="stSidebar"] {
         background: #12272f;
     }
-    /* Texto de la barra lateral en color claro para que se vea bien */
+    /* Todo el texto de la barra lateral en claro */
     section[data-testid="stSidebar"] * {
         color: #e8eef0 !important;
     }
@@ -46,17 +68,24 @@ st.markdown(
     section[data-testid="stSidebar"] h3 {
         color: #e07a5f !important;
     }
+    /* Inputs dentro de la barra lateral: fondo claro, texto oscuro */
+    section[data-testid="stSidebar"] input,
+    section[data-testid="stSidebar"] textarea,
+    section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+        background-color: #f3f6f7 !important;
+        color: #14303d !important;
+    }
     /* Botones terracota */
     .stButton>button {
         background-color: #e07a5f;
-        color: #fff;
+        color: #fff !important;
         border-radius: 10px;
         border: none;
         font-weight: 600;
     }
     .stButton>button:hover {
         background-color: #c9583c;
-        color: #fff;
+        color: #fff !important;
     }
     </style>
     """,
